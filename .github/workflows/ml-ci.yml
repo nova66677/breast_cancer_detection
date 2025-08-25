@@ -40,10 +40,12 @@ jobs:
       - name: Generate synthetic dataset for CI
         run: |
           mkdir -p data
+          export PYTHONPATH=$PWD
           python scripts/synthetic_wdbc.py -o data/ci_sample.csv -n 120 --seed 42
 
       - name: Fast training (CI)
         run: |
+          export PYTHONPATH=$PWD
           python scripts/train_fast_ci.py -i data/ci_sample.csv -o outputs_ci --cv 3
 
 
